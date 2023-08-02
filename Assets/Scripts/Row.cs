@@ -31,7 +31,7 @@ public class Row : MonoBehaviour
     public string ReadWord()
     {
         if (!isFull) return string.Empty;
-        
+
         var stringBuilder = new StringBuilder(string.Empty);
 
         foreach (var tile in tiles)
@@ -42,6 +42,9 @@ public class Row : MonoBehaviour
 
     public void DeleteLetter()
     {
-        tiles[--ActiveTileIndex].Letter = '\0';
+        if (isFull)
+            tiles[ActiveTileIndex--].Letter = '\0';
+        else
+            tiles[--ActiveTileIndex].Letter = '\0';
     }
 }

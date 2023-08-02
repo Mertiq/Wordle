@@ -16,8 +16,6 @@ public class Tile : MonoBehaviour
         get => letter;
         set
         {
-            if (isFilled) return;
-            
             letter = value;
             text.text = letter.ToString().ToUpper();
         }
