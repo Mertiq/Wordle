@@ -25,10 +25,10 @@ public class Row : MonoBehaviour
     {
         if (isFull) return;
 
-        tiles[ActiveTileIndex++].Letter = letter;
+        tiles[ActiveTileIndex++].Letter = char.Parse(letter.ToString().ToLower());
     }
 
-    public string ReadWord()
+    private string ReadWord()
     {
         if (!isFull) return string.Empty;
 
@@ -46,5 +46,29 @@ public class Row : MonoBehaviour
             tiles[ActiveTileIndex--].Letter = '\0';
         else
             tiles[--ActiveTileIndex].Letter = '\0';
+    }
+
+    public void CheckAnswer(string answer)
+    {
+        if (!isFull) return;
+
+        if (ReadWord().Equals(answer))
+        {
+            foreach (var tile in tiles)
+                tile.State = TileState.Correct;
+        }
+        else
+        {
+            var index = 0;
+            foreach (var tile in tiles)
+            {
+                var letter = tile.Letter;
+
+                if (letter.Equals(answer[index++]))
+                    tile.State = TileState.Correct;
+                else
+                    tile.State = answer.Contains(letter) ? TileState.MisPlaced : TileState.Wrong;
+            }
+        }
     }
 }

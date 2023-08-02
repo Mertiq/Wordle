@@ -23,9 +23,10 @@ public class Board : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Backspace))
-        {
             rows[activeRowIndex].DeleteLetter();
-        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+            rows[activeRowIndex].CheckAnswer(GameManager.Instance.answer);
         
         if (Input.anyKeyDown)
         {
