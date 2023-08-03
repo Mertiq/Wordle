@@ -13,7 +13,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public IEnumerator NewGame()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         GetRandomAnswer();
         board.ResetBoard();
     }

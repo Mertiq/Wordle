@@ -50,23 +50,18 @@ public class Row : MonoBehaviour
 
     public bool CheckAnswer(string answer)
     {
+        var index = 0;
+
         if (ReadWord().Equals(answer))
         {
             foreach (var tile in tiles)
-                tile.State = TileState.Correct;
+                StartCoroutine(tile.CheckTileLetter(answer, index++));
             return true;
         }
 
-        var index = 0;
+        index = 0;
         foreach (var tile in tiles)
-        {
-            var letter = tile.Letter;
-
-            if (letter.Equals(answer[index++]))
-                tile.State = TileState.Correct;
-            else
-                tile.State = answer.Contains(letter) ? TileState.MisPlaced : TileState.Wrong;
-        }
+            StartCoroutine(tile.CheckTileLetter(answer, index++));
 
         return false;
     }

@@ -264,3 +264,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 6440040935598634905}
   image: {fileID: 6440040935020193394}
+  rotationDuration: 0.3
+  state: 0

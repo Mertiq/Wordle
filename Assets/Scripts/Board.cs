@@ -33,7 +33,11 @@ public class Board : MonoBehaviour
             if (!rows[ActiveRowIndex].isFull) return;
 
             if (!rows[ActiveRowIndex].CheckAnswer(GameManager.Instance.answer))
+            {
                 ActiveRowIndex++;
+                if (isEnd)
+                    StartCoroutine(GameManager.Instance.NewGame());
+            }
             else
             {
                 canEnterInput = false;
