@@ -37,7 +37,7 @@ public class Row : MonoBehaviour
         foreach (var tile in tiles)
             stringBuilder.Append(tile.Letter);
 
-        return stringBuilder.ToString();
+        return stringBuilder.ToString().ToLower();
     }
 
     public void DeleteLetter()
@@ -50,8 +50,6 @@ public class Row : MonoBehaviour
 
     public bool CheckAnswer(string answer)
     {
-        if (!isFull) return false;
-
         if (ReadWord().Equals(answer))
         {
             foreach (var tile in tiles)
@@ -69,6 +67,16 @@ public class Row : MonoBehaviour
             else
                 tile.State = answer.Contains(letter) ? TileState.MisPlaced : TileState.Wrong;
         }
+
         return false;
+    }
+
+    public void ResetRow()
+    {
+        foreach (var tile in tiles)
+            tile.ResetTile();
+
+        ActiveTileIndex = 0;
+        isFull = false;
     }
 }

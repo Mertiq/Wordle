@@ -8,8 +8,6 @@ public class WordleAPI : SingletonMonoBehaviour<WordleAPI>
 {
     private void Start()
     {
-        var client = new HttpClient();
-
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Get,
@@ -21,12 +19,12 @@ public class WordleAPI : SingletonMonoBehaviour<WordleAPI>
             }
         };
 
-        Read(client, request);
+        Read(request);
     }
 
-    private static async void Read(HttpClient client, HttpRequestMessage request)
+    private static async void Read(HttpRequestMessage request)
     {
-        using var response = client.SendAsync(request);
+        using var response = new HttpClient().SendAsync(request);
 
         var jsonContent = await response.Result.Content.ReadAsStringAsync();
 
@@ -35,6 +33,7 @@ public class WordleAPI : SingletonMonoBehaviour<WordleAPI>
         var answerList = new List<string>(content.data.Select(x => x.answer));
 
         GameManager.Instance.answers = answerList;
+        GameManager.Instance.GetRandomAnswer();
     }
 }
 

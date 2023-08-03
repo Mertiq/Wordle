@@ -34,6 +34,12 @@ public class Tile : MonoBehaviour
                 .FirstOrDefault(x => x.key.Equals(value))?.value;
         }
     }
+
+    public void ResetTile()
+    {
+        Letter = '\0';
+        State = TileState.None;   
+    }
 }
 
 public enum TileState

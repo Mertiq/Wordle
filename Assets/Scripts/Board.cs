@@ -7,6 +7,7 @@ public class Board : MonoBehaviour
 
     private int activeRowIndex;
     private bool isEnd;
+    private bool canEnterInput = true;
 
     private int ActiveRowIndex
     {
@@ -22,13 +23,22 @@ public class Board : MonoBehaviour
 
     private void Update()
     {
+        if (!canEnterInput) return;
+
         if (Input.GetKeyDown(KeyCode.Backspace))
             rows[ActiveRowIndex].DeleteLetter();
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (!rows[ActiveRowIndex].CheckAnswer(GameManager.Instance.answer)) 
+            if (!rows[ActiveRowIndex].isFull) return;
+
+            if (!rows[ActiveRowIndex].CheckAnswer(GameManager.Instance.answer))
                 ActiveRowIndex++;
+            else
+            {
+                canEnterInput = false;
+                StartCoroutine(GameManager.Instance.NewGame());
+            }
         }
 
         if (Input.anyKeyDown)
@@ -40,5 +50,14 @@ public class Board : MonoBehaviour
                 rows[ActiveRowIndex].WriteLetter(char.Parse(input));
             }
         }
+    }
+
+    public void ResetBoard()
+    {
+        foreach (var row in rows)
+            row.ResetRow();
+
+        ActiveRowIndex = 0;
+        canEnterInput = true;
     }
 }
