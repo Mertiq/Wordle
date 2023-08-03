@@ -4,10 +4,10 @@ using UnityEngine;
 public class Board : MonoBehaviour
 {
     public List<Row> rows;
-    
+
     private int activeRowIndex;
     private bool isEnd;
-    
+
     private int ActiveRowIndex
     {
         get => activeRowIndex;
@@ -23,18 +23,21 @@ public class Board : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Backspace))
-            rows[activeRowIndex].DeleteLetter();
+            rows[ActiveRowIndex].DeleteLetter();
 
         if (Input.GetKeyDown(KeyCode.Return))
-            rows[activeRowIndex].CheckAnswer(GameManager.Instance.answer);
-        
+        {
+            if (!rows[ActiveRowIndex].CheckAnswer(GameManager.Instance.answer)) 
+                ActiveRowIndex++;
+        }
+
         if (Input.anyKeyDown)
         {
             var input = Input.inputString;
 
             if (Extensions.IsLetter(input))
             {
-                rows[activeRowIndex].WriteLetter(char.Parse(input));
+                rows[ActiveRowIndex].WriteLetter(char.Parse(input));
             }
         }
     }

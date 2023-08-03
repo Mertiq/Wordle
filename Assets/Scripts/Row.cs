@@ -48,27 +48,27 @@ public class Row : MonoBehaviour
             tiles[--ActiveTileIndex].Letter = '\0';
     }
 
-    public void CheckAnswer(string answer)
+    public bool CheckAnswer(string answer)
     {
-        if (!isFull) return;
+        if (!isFull) return false;
 
         if (ReadWord().Equals(answer))
         {
             foreach (var tile in tiles)
                 tile.State = TileState.Correct;
+            return true;
         }
-        else
-        {
-            var index = 0;
-            foreach (var tile in tiles)
-            {
-                var letter = tile.Letter;
 
-                if (letter.Equals(answer[index++]))
-                    tile.State = TileState.Correct;
-                else
-                    tile.State = answer.Contains(letter) ? TileState.MisPlaced : TileState.Wrong;
-            }
+        var index = 0;
+        foreach (var tile in tiles)
+        {
+            var letter = tile.Letter;
+
+            if (letter.Equals(answer[index++]))
+                tile.State = TileState.Correct;
+            else
+                tile.State = answer.Contains(letter) ? TileState.MisPlaced : TileState.Wrong;
         }
+        return false;
     }
 }
