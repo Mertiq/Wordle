@@ -49,7 +49,7 @@ public class Board : MonoBehaviour
         {
             var input = Input.inputString;
 
-            if (Extensions.IsLetter(input))
+            if (input.IsLetter())
             {
                 rows[ActiveRowIndex].WriteLetter(char.Parse(input));
             }

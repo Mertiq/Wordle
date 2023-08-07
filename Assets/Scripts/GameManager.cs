@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
@@ -20,7 +19,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void GetRandomAnswer()
     {
-        answer = answers[Random.Range(0, answers.Count)].ToLower();
+        answer = answers.GetRandomItem().ToLower();
         Debug.Log(answer);
     }
 }
