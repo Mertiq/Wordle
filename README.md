@@ -1,5 +1,6 @@
 # Wordle
 Replica of the Wordle game.
 
-https://github.com/Mertiq/Wordle/assets/61623447/afd538bd-14db-4402-97ef-a0b52241b984
+https://github.com/Mertiq/Wordle/assets/61623447/1624aef4-9ab1-4f47-b930-1371e1b7a7b6
+
 
